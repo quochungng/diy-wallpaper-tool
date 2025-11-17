@@ -1,0 +1,3 @@
+- dự án web trên nền tảng kotlin multiplatform
+- gần như tât cả code sẽ được xử lý trong: composeApp/src/webMain/kotlin/com/dmb/tools/diywallpaper
+- ưu tiên tách các thành phần dùng chung thành component để làm tăng tính tái sử dụng.
