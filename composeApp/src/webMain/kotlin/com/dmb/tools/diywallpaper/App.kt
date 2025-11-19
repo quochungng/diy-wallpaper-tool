@@ -47,6 +47,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
+import coil3.compose.rememberAsyncImagePainter
 import com.dmb.tools.diywallpaper.models.ContentSource
 import com.dmb.tools.diywallpaper.models.UnitType
 import com.dmb.tools.diywallpaper.models.UnitValue
@@ -186,6 +187,7 @@ fun App() {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Spacer(modifier = Modifier.weight(1f))
+                val painter = rememberAsyncImagePainter("https://picsum.photos/300/300")
                 Canvas(
                     modifier = Modifier.size(width = canvasWidth.dp, height = canvasHeight.dp)
                 ) {
@@ -199,6 +201,9 @@ fun App() {
                         topLeft = Offset(10f, 10f),
                         size = Size(20f, 20f)
                     )
+                    with(painter) {
+                        draw(painter.intrinsicSize)
+                    }
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 Row(

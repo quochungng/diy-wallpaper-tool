@@ -31,8 +31,13 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation("org.jetbrains.compose.material:material-icons-core:1.4.0") // or material-icons-extended
             implementation("org.jetbrains.compose.material:material-icons-extended:1.6.0")
+            implementation(libs.coil.compose)
+            implementation(libs.coil.network.ktor)
 
+        }
 
+        jsMain.dependencies {
+            implementation(libs.ktor.js)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
