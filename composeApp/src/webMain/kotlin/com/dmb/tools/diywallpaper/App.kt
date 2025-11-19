@@ -25,6 +25,7 @@ import androidx.compose.material.icons.filled.Pause
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.ResetTv
 import androidx.compose.material.icons.filled.Save
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -54,7 +55,10 @@ import com.dmb.tools.diywallpaper.models.UnitValue
 import com.dmb.tools.diywallpaper.models.WallpaperElement
 import com.dmb.tools.diywallpaper.models.WallpaperTransform
 import com.dmb.tools.diywallpaper.views.ElementView
+import com.dmb.tools.diywallpaper.views.ElementView
 import com.dmb.tools.diywallpaper.views.IntInput
+import com.dmb.tools.diywallpaper.views.SettingsDialog
+import kotlinx.browser.localStorage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -67,6 +71,25 @@ fun App() {
             var canvasHeight by remember { mutableIntStateOf(650) }
             var isPlaying by remember { mutableStateOf(false) }
             var elements: List<WallpaperElement> by remember { mutableStateOf(emptyList()) }
+            var showSettingsDialog by remember { mutableStateOf(false) }
+            var bearerToken by remember { mutableStateOf("") }
+
+            LaunchedEffect(Unit) {
+                bearerToken = localStorage.getItem("bearer_token") ?: ""
+            }
+
+            if (showSettingsDialog) {
+                SettingsDialog(
+                    onDismiss = { showSettingsDialog = false },
+                    onSave = { token ->
+                        bearerToken = token
+                        localStorage.setItem("bearer_token", token)
+                        showSettingsDialog = false
+                    },
+                    initialToken = bearerToken
+                )
+            }
+
             Scaffold(
                 modifier = Modifier.weight(1f),
                 topBar = {
@@ -95,6 +118,11 @@ fun App() {
                                 )
                             }) {
                                 Icon(Icons.Default.Add, contentDescription = "Add Element")
+                            }
+                            IconButton(onClick = {
+                                showSettingsDialog = true
+                            }) {
+                                Icon(Icons.Default.Settings, contentDescription = "Settings")
                             }
                         }
                     )

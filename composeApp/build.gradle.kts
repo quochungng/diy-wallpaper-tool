@@ -33,6 +33,7 @@ kotlin {
             implementation("org.jetbrains.compose.material:material-icons-extended:1.6.0")
             implementation(libs.coil.compose)
             implementation(libs.coil.network.ktor)
+            implementation("org.jetbrains.kotlinx:kotlinx-browser:0.5.0")
 
         }
 
