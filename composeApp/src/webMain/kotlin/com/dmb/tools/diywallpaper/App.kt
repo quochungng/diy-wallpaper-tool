@@ -68,9 +68,34 @@ fun App() {
             Scaffold(
                 modifier = Modifier.weight(1f),
                 topBar = {
-                    TopAppBar(title = {
-                        Text("Diy Wallpaper Tool")
-                    })
+                    TopAppBar(
+                        title = {
+                            Text("Diy Wallpaper Tool")
+                        },
+                        actions = {
+                            IconButton(onClick = {
+                                elements = elements + WallpaperElement(
+                                    id = "id",
+                                    index = 0,
+                                    contentSource = ContentSource.Image(""),
+                                    transform = WallpaperTransform(
+                                        width = UnitValue.Value(0f, UnitType.DP),
+                                        height = UnitValue.Value(0f, UnitType.DP),
+                                        positionX = UnitValue.Value(0f, UnitType.DP),
+                                        positionY = UnitValue.Value(0f, UnitType.DP),
+                                        rotation = 0f,
+                                        scaleX = 1f,
+                                        scaleY = 1f,
+                                        pivotX = UnitValue.Value(0f, UnitType.DP),
+                                        pivotY = UnitValue.Value(0f, UnitType.DP),
+                                    ),
+                                    animations = emptyList()
+                                )
+                            }) {
+                                Icon(Icons.Default.Add, contentDescription = "Add Element")
+                            }
+                        }
+                    )
                 },
                 bottomBar = {
                     Row(
@@ -85,32 +110,6 @@ fun App() {
                         TextButton(onClick = {}) {
                             Text("Reset")
                         }
-                    }
-                },
-                floatingActionButton = {
-                    FloatingActionButton(onClick = {
-                        elements = elements + WallpaperElement(
-                            id = "id",
-                            index = 0,
-                            contentSource = ContentSource.Image(""),
-                            transform = WallpaperTransform(
-                                width = UnitValue.Value(0f, UnitType.DP),
-                                height = UnitValue.Value(0f, UnitType.DP),
-                                positionX = UnitValue.Value(0f, UnitType.DP),
-                                positionY = UnitValue.Value(0f, UnitType.DP),
-                                rotation = 0f,
-                                scaleX = 1f,
-                                scaleY = 1f,
-                                pivotX = UnitValue.Value(0f, UnitType.DP),
-                                pivotY = UnitValue.Value(0f, UnitType.DP),
-                            ),
-                            animations = emptyList()
-                        )
-                    }) {
-                        Text(
-                            modifier = Modifier.padding(horizontal = 16.dp),
-                            text = "Add Element"
-                        )
                     }
                 }
             ) { paddingValues ->
@@ -168,6 +167,11 @@ fun App() {
                         ElementView(
                             modifier = Modifier.fillMaxWidth(),
                             element = element,
+                            onDelete = {
+                                val newList = elements.toMutableList()
+                                newList.removeAt(index)
+                                elements = newList
+                            },
                             onChange = {
                                 elements = elements.mapIndexed { i, e ->
                                     if (i == index) {
