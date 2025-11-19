@@ -59,43 +59,43 @@ fun AnimationView(
 
         var showAddDropdown by remember { mutableStateOf(false) }
         Button(onClick = { showAddDropdown = true }) {
+            DropdownMenu(
+                expanded = showAddDropdown,
+                onDismissRequest = { showAddDropdown = false }
+            ) {
+                DropdownMenuItem(
+                    text = { Text("Translation") },
+                    onClick = {
+                        val newAnim = Animation.Translation(
+                            fromX = UnitValue.Value(0f, UnitType.PX),
+                            toX = UnitValue.Value(100f, UnitType.PX),
+                            fromY = UnitValue.Value(0f, UnitType.PX),
+                            toY = UnitValue.Value(100f, UnitType.PX),
+                            duration = 1000,
+                            repeatCount = 0
+                        )
+                        onChanged(animations + newAnim)
+                        showAddDropdown = false
+                    }
+                )
+                DropdownMenuItem(
+                    text = { Text("Rotation") },
+                    onClick = {
+                        val newAnim = Animation.Rotation(
+                            fromAngle = 0f,
+                            toAngle = 360f,
+                            pivotX = UnitValue.Value(0.5f, UnitType.RATIO),
+                            pivotY = UnitValue.Value(0.5f, UnitType.RATIO),
+                            duration = 1000,
+                            repeatCount = 0
+                        )
+                        onChanged(animations + newAnim)
+                        showAddDropdown = false
+                    }
+                )
+            }
             Icon(Icons.Default.Add, contentDescription = "Add Animation")
             Text("Add Animation")
-        }
-        DropdownMenu(
-            expanded = showAddDropdown,
-            onDismissRequest = { showAddDropdown = false }
-        ) {
-            DropdownMenuItem(
-                text = { Text("Translation") },
-                onClick = {
-                    val newAnim = Animation.Translation(
-                        fromX = UnitValue.Value(0f, UnitType.PX),
-                        toX = UnitValue.Value(100f, UnitType.PX),
-                        fromY = UnitValue.Value(0f, UnitType.PX),
-                        toY = UnitValue.Value(100f, UnitType.PX),
-                        duration = 1000,
-                        repeatCount = 0
-                    )
-                    onChanged(animations + newAnim)
-                    showAddDropdown = false
-                }
-            )
-            DropdownMenuItem(
-                text = { Text("Rotation") },
-                onClick = {
-                    val newAnim = Animation.Rotation(
-                        fromAngle = 0f,
-                        toAngle = 360f,
-                        pivotX = UnitValue.Value(0.5f, UnitType.RATIO),
-                        pivotY = UnitValue.Value(0.5f, UnitType.RATIO),
-                        duration = 1000,
-                        repeatCount = 0
-                    )
-                    onChanged(animations + newAnim)
-                    showAddDropdown = false
-                }
-            )
         }
     }
 }
