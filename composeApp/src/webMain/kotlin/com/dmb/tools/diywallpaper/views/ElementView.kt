@@ -63,5 +63,25 @@ fun ElementView(
                 ))
             }
         )
+
+        HorizontalDivider(Modifier.padding(vertical = 8.dp))
+
+        TransformView(
+            modifier = Modifier.fillMaxWidth(),
+            transform = element.transform,
+            onChanged = {
+                onChange(element.copy(transform = it))
+            }
+        )
+
+        HorizontalDivider(Modifier.padding(vertical = 8.dp))
+
+        AnimationView(
+            modifier = Modifier.fillMaxWidth(),
+            animations = element.animations,
+            onChanged = {
+                onChange(element.copy(animations = it))
+            }
+        )
     }
 }

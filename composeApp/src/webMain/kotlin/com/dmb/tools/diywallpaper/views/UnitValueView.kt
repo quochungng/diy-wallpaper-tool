@@ -124,11 +124,37 @@ fun UnitValueView(unitValue: UnitValue, onDelete: (() -> Unit)? = null, onChange
         }
 
         is UnitValue.Multiple -> {
-
+            UnitValueView(unitValue.a, onDelete = {
+                onChanged(unitValue.a)
+            }, onChanged = {
+                onChanged(unitValue.copy(a = it))
+            })
+            Text(" * ")
+            OutlinedTextField(
+                modifier = Modifier.width(100.dp),
+                value = unitValue.b.toString(),
+                onValueChange = {
+                    onChanged(unitValue.copy(b = try { it.toFloat() } catch (_: Exception) { 1f }))
+                },
+                label = { Text("Factor") }
+            )
         }
 
         is UnitValue.Divide -> {
-
+            UnitValueView(unitValue.a, onDelete = {
+                onChanged(unitValue.a)
+            }, onChanged = {
+                onChanged(unitValue.copy(a = it))
+            })
+            Text(" / ")
+            OutlinedTextField(
+                modifier = Modifier.width(100.dp),
+                value = unitValue.b.toString(),
+                onValueChange = {
+                    onChanged(unitValue.copy(b = try { it.toFloat() } catch (_: Exception) { 1f }))
+                },
+                label = { Text("Divisor") }
+            )
         }
     }
 }

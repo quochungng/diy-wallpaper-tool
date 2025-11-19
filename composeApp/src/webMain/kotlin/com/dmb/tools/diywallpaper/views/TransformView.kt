@@ -58,23 +58,19 @@ fun TransformView(modifier: Modifier = Modifier, transform: WallpaperTransform, 
         Spacer(Modifier.height(8.dp))
         Text("Pivot")
         Spacer(Modifier.height(4.dp))
-//        Row(Modifier.fillMaxWidth()) {
-//            Column(Modifier.weight(1f)) {
-//                Text("Pivot X")
-//                Slider(
-//                    value = transform.pivotX,
-//                    onValueChange = { onChanged(transform.copy(pivotX = it)) },
-//                    valueRange = 0f..1f
-//                )
-//            }
-//            Column(Modifier.weight(1f)) {
-//                Text("Pivot Y")
-//                Slider(
-//                    value = transform.pivotY,
-//                    onValueChange = { onChanged(transform.copy(pivotY = it)) },
-//                    valueRange = 0f..1f
-//                )
-//            }
-//        }
+        Row(Modifier.fillMaxWidth()) {
+            Column(Modifier.weight(1f)) {
+                Text("Pivot X")
+                SizeGroup(text = "Pivot X", size = transform.pivotX) {
+                    onChanged(transform.copy(pivotX = it))
+                }
+            }
+            Column(Modifier.weight(1f)) {
+                Text("Pivot Y")
+                SizeGroup(text = "Pivot Y", size = transform.pivotY) {
+                    onChanged(transform.copy(pivotY = it))
+                }
+            }
+        }
     }
 }

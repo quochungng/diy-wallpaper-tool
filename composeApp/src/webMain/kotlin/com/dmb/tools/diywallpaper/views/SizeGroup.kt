@@ -55,7 +55,7 @@ fun SizeGroup(text: String, size: UnitValue, onValueChange: (UnitValue) -> Unit)
         verticalAlignment = Alignment.CenterVertically
     ) {
         UnitValueView(size) {
-            (it)
+            onValueChange(it)
         }
     }
 }
