@@ -122,28 +122,26 @@ fun AnimationItemView(
             }
             
             Row {
-                OutlinedTextField(
+                LongInput(
                     modifier = Modifier.weight(1f),
-                    value = animation.duration.toString(),
+                    value = animation.duration,
                     onValueChange = {
-                        val newDuration = try { it.toLong() } catch (_: Exception) { 0L }
                         val newAnim = when (animation) {
-                            is Animation.Translation -> animation.copy(duration = newDuration)
-                            is Animation.Rotation -> animation.copy(duration = newDuration)
+                            is Animation.Translation -> animation.copy(duration = it)
+                            is Animation.Rotation -> animation.copy(duration = it)
                         }
                         onChanged(newAnim)
                     },
                     label = { Text("Duration (ms)") }
                 )
                 Spacer(Modifier.width(8.dp))
-                OutlinedTextField(
+                IntInput(
                     modifier = Modifier.weight(1f),
-                    value = animation.repeatCount.toString(),
+                    value = animation.repeatCount,
                     onValueChange = {
-                        val newRepeat = try { it.toInt() } catch (_: Exception) { 0 }
                         val newAnim = when (animation) {
-                            is Animation.Translation -> animation.copy(repeatCount = newRepeat)
-                            is Animation.Rotation -> animation.copy(repeatCount = newRepeat)
+                            is Animation.Translation -> animation.copy(repeatCount = it)
+                            is Animation.Rotation -> animation.copy(repeatCount = it)
                         }
                         onChanged(newAnim)
                     },
@@ -170,20 +168,20 @@ fun AnimationItemView(
                 }
                 is Animation.Rotation -> {
                     Row {
-                        OutlinedTextField(
+                        FloatInput(
                             modifier = Modifier.weight(1f),
-                            value = animation.fromAngle.toString(),
+                            value = animation.fromAngle,
                             onValueChange = {
-                                onChanged(animation.copy(fromAngle = try { it.toFloat() } catch (_: Exception) { 0f }))
+                                onChanged(animation.copy(fromAngle = it))
                             },
                             label = { Text("From Angle") }
                         )
                         Spacer(Modifier.width(8.dp))
-                        OutlinedTextField(
+                        FloatInput(
                             modifier = Modifier.weight(1f),
-                            value = animation.toAngle.toString(),
+                            value = animation.toAngle,
                             onValueChange = {
-                                onChanged(animation.copy(toAngle = try { it.toFloat() } catch (_: Exception) { 0f }))
+                                onChanged(animation.copy(toAngle = it))
                             },
                             label = { Text("To Angle") }
                         )

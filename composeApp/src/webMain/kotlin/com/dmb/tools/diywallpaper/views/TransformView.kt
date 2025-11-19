@@ -28,11 +28,11 @@ fun TransformView(modifier: Modifier = Modifier, transform: WallpaperTransform, 
         Spacer(Modifier.height(8.dp))
         Text("Scale")
         Spacer(Modifier.height(4.dp))
-        OutlinedTextField(
+        FloatInput(
             label = { Text("Scale") },
-            value = transform.scaleX.toString(),
+            value = transform.scaleX,
             onValueChange = {
-                onChanged(transform.copy(scaleX = try { it.toFloat() } catch (_: Exception) { 1f }))
+                onChanged(transform.copy(scaleX = it))
             }
         )
         Slider(
@@ -43,11 +43,11 @@ fun TransformView(modifier: Modifier = Modifier, transform: WallpaperTransform, 
         Spacer(Modifier.height(8.dp))
         Text("Rotation")
         Spacer(Modifier.height(4.dp))
-        OutlinedTextField(
+        FloatInput(
             label = { Text("Rotation") },
-            value = transform.rotation.toString(),
+            value = transform.rotation,
             onValueChange = {
-                onChanged(transform.copy(rotation = try { it.toFloat() } catch (_: Exception) { 0f }))
+                onChanged(transform.copy(rotation = it))
             }
         )
         Slider(

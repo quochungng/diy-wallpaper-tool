@@ -80,16 +80,11 @@ fun ElementView(
                             }
                         )
                         Spacer(Modifier.width(16.dp))
-                        OutlinedTextField(
+                        IntInput(
                             modifier = Modifier.width(100.dp),
-                            value = element.index.toString(),
+                            value = element.index,
                             onValueChange = {
-                                onChange(element.copy(index = try {
-                                    it.toInt()
-                                } catch (e: Exception) {
-                                    e.printStackTrace()
-                                    0
-                                }))
+                                onChange(element.copy(index = it))
                             },
                             label = {
                                 Text("Index")

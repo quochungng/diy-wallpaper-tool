@@ -53,6 +53,7 @@ import com.dmb.tools.diywallpaper.models.UnitValue
 import com.dmb.tools.diywallpaper.models.WallpaperElement
 import com.dmb.tools.diywallpaper.models.WallpaperTransform
 import com.dmb.tools.diywallpaper.views.ElementView
+import com.dmb.tools.diywallpaper.views.IntInput
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -119,33 +120,23 @@ fun App() {
                     item {
                         Row {
                             Spacer(modifier = Modifier.width(16.dp))
-                            TextField(
+                            IntInput(
                                 label = {
                                     Text("Canvas Width")
                                 },
-                                value = canvasWidth.toString(),
+                                value = canvasWidth,
                                 onValueChange = {
-                                    canvasWidth = try {
-                                        it.toInt()
-                                    } catch (e: Exception) {
-                                        e.printStackTrace()
-                                        0
-                                    }
+                                    canvasWidth = it
                                 }
                             )
                             Spacer(modifier = Modifier.width(16.dp))
-                            TextField(
+                            IntInput(
                                 label = {
                                     Text("Canvas Height")
                                 },
-                                value = canvasHeight.toString(),
+                                value = canvasHeight,
                                 onValueChange = {
-                                    canvasHeight = try {
-                                        it.toInt()
-                                    } catch (e: Exception) {
-                                        e.printStackTrace()
-                                        0
-                                    }
+                                    canvasHeight = it
                                 }
                             )
                             Spacer(Modifier.height(16.dp))

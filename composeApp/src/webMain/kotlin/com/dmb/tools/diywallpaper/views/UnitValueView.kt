@@ -24,10 +24,10 @@ import com.dmb.tools.diywallpaper.models.UnitValue
 fun UnitValueView(unitValue: UnitValue, onDelete: (() -> Unit)? = null, onChanged: (UnitValue) -> Unit) {
     when (unitValue) {
         is UnitValue.Value -> {
-            OutlinedTextField(
+            FloatInput(
                 modifier = Modifier.width(200.dp),
-                value = unitValue.value.toString(),
-                placeholder = { Text("Value") },
+                value = unitValue.value,
+                label = { Text("Value") },
                 leadingIcon = {
                     var showDropdown by remember { mutableStateOf(false) }
                     DropdownMenu(
@@ -84,11 +84,7 @@ fun UnitValueView(unitValue: UnitValue, onDelete: (() -> Unit)? = null, onChange
                 onValueChange = {
                     onChanged(
                         unitValue.copy(
-                            value = try {
-                                it.toFloat()
-                            } catch (_: Exception) {
-                                0f
-                            }
+                            value = it
                         )
                     )
                 }
@@ -130,11 +126,11 @@ fun UnitValueView(unitValue: UnitValue, onDelete: (() -> Unit)? = null, onChange
                 onChanged(unitValue.copy(a = it))
             })
             Text(" * ")
-            OutlinedTextField(
+            FloatInput(
                 modifier = Modifier.width(100.dp),
-                value = unitValue.b.toString(),
+                value = unitValue.b,
                 onValueChange = {
-                    onChanged(unitValue.copy(b = try { it.toFloat() } catch (_: Exception) { 1f }))
+                    onChanged(unitValue.copy(b = it))
                 },
                 label = { Text("Factor") }
             )
@@ -147,11 +143,11 @@ fun UnitValueView(unitValue: UnitValue, onDelete: (() -> Unit)? = null, onChange
                 onChanged(unitValue.copy(a = it))
             })
             Text(" / ")
-            OutlinedTextField(
+            FloatInput(
                 modifier = Modifier.width(100.dp),
-                value = unitValue.b.toString(),
+                value = unitValue.b,
                 onValueChange = {
-                    onChanged(unitValue.copy(b = try { it.toFloat() } catch (_: Exception) { 1f }))
+                    onChanged(unitValue.copy(b = it))
                 },
                 label = { Text("Divisor") }
             )
